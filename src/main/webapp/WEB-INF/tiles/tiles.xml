@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://mon01.settour.com.tw/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<!-- layout template start -->
+	<definition name="userview" template="/WEB-INF/jsp/users.jsp">
+		<put-attribute name="commonTitle" value="UserListView-測試" />
+		<put-attribute name="title" />
+		<put-attribute name="keyword" value="UserListView-測試-Keyword" />
+		<put-attribute name="description" value="UserListView-測試-description" />
+		<put-attribute name="content" />
+	</definition>
+</tiles-definitions>
