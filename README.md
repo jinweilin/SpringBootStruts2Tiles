@@ -7,5 +7,6 @@ src/main/resources/struts.xml
 
 # Tiles Setting
 You can add more settings of tiles in application.properties.
-src/main/webapp/WEB-INF/tiles/tiles.xml
+
+setting files: src/main/webapp/WEB-INF/tiles/tiles.xml
 
