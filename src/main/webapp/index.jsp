@@ -15,7 +15,7 @@
 			<p>Bad username/password</p>
 		</c:if> --%>
 
-	<form:form action="/j_spring_security_check" method="post">
+	<form:form action="j_spring_security_check" method="post">
 		<label>Username:</label>
 		<input type="text" name="username" />
 		<label>Password:</label>
