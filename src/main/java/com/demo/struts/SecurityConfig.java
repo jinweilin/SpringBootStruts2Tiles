@@ -6,7 +6,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.demo.struts.security.CustomAuthenticationProvider;
 
@@ -30,11 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
-		    .antMatchers("/", "/js/**", "/images/**")
+		    .antMatchers("/", "/js/**", "/images/**","/actuator/**")
 		    .permitAll().anyRequest().hasRole("USER").and()
 		    .formLogin().loginPage("/index.jsp")
 		    .failureUrl("/index.jsp?error=1").loginProcessingUrl("/j_spring_security_check").permitAll().and().logout()
 		    .logoutSuccessUrl("/users");
 	}
+
 
 }

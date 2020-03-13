@@ -2,8 +2,8 @@ package com.demo.struts;
 
 import java.util.EventListener;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
 
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 import org.apache.struts2.tiles.StrutsTilesListener;
@@ -14,6 +14,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.elasticsearch.rest.RestClientAutoConfiguration;
+import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
@@ -22,7 +25,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.demo.struts.service.ServiceFacade;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { FreeMarkerAutoConfiguration.class, RedisAutoConfiguration.class,RestClientAutoConfiguration.class })
 public class Application extends SpringBootServletInitializer implements ApplicationRunner {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 	@Autowired
@@ -39,12 +42,15 @@ public class Application extends SpringBootServletInitializer implements Applica
 	}
 
 	@Bean
-	public FilterRegistrationBean filterRegistrationBean() {
-		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-		StrutsPrepareAndExecuteFilter struts = new StrutsPrepareAndExecuteFilter();
-		registrationBean.setFilter(struts);
-		registrationBean.setOrder(1);
-		return registrationBean;
+	public FilterRegistrationBean<Filter> filterRegistrationBean() {
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
+		registration.setFilter(new StrutsPrepareAndExecuteFilter());
+		registration.setName("struts");
+		registration.addUrlPatterns("/*");
+		registration.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.FORWARD);
+		registration.setName("StrutsPrepareAndExecuteFilter");
+		registration.setOrder(3);
+		return registration;
 	}
 
 	@Bean

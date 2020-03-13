@@ -5,7 +5,7 @@
 
 <tiles-definitions>
 	<!-- layout template start -->
-	<definition name="userview" template="/WEB-INF/jsp/users.jsp">
+	<definition name="usertilesview" template="/WEB-INF/jsp/tilesview.jsp">
 		<put-attribute name="commonTitle" value="UserListView-測試" />
 		<put-attribute name="title" />
 		<put-attribute name="keyword" value="UserListView-測試-Keyword" />
